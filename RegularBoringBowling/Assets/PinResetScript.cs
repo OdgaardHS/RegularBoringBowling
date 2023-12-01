@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 public class PinResetScript : MonoBehaviour
 {
@@ -11,16 +12,14 @@ public class PinResetScript : MonoBehaviour
 
     public Transform spawnPosition;
 
+    public Collider TriggerZone;
 
-    public void instantiatePins()
+
+ 
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (pinParent != null)
-        {
-            Destroy(pinParent);
-            pinParent = Instantiate(BowlingPinsWorking, spawnPosition);
-        }
-        
-        
+       SceneManager.LoadScene("BowlingScene");
     }
 
 

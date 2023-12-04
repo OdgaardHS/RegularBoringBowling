@@ -6,6 +6,7 @@ TagManager:
   tags:
   - DestroyTag
   - ResetZone
+  - Ammunition
   layers:
   - Default
   - TransparentFX

@@ -28,9 +28,10 @@ public class BowlingPin : MonoBehaviour
             if (angle >= 75)
             {
                 Score.PlayerScore++;
+                Score.PinsSinceRoundStart++;
                 isFallen = true;
 
-                Debug.Log(Score.PlayerScore);
+                Debug.Log($"TotalScore: {Score.PlayerScore} Round Score: {Score.PinsSinceRoundStart}");
             }
         }
         

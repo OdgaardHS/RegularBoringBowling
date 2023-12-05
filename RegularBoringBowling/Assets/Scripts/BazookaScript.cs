@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,12 +19,27 @@ public class BazookaScript : MonoBehaviour
     
     //Transforms
     [SerializeField] private Transform shootingTransform;
+    [SerializeField] private Transform outOfSightPosition;
+    [SerializeField] private Transform bazookaParent;
+
+    private GameObject ammoInstance;
+    private Collider thisGameobjectCollider;
+    
+    //Ints
+    [SerializeField] private int shootingForce = 3000;
     
     
     [SerializeField] private InputActionReference triggerButtonReference = null;
     
+    [SerializeField] private AudioSource BazookaAudioSource;
+    
+    [SerializeField] private AudioClip[] arrayBazookaSounds; // The array controlling the sounds
+    
+    public int pickedSoundToPlay;
+    
     private void Awake()
     {
+        thisGameobjectCollider = gameObject.GetComponent<Collider>();
         triggerButtonReference.action.Enable();
         triggerButtonReference.action.started += ShootBazooka;
         triggerButtonReference.action.performed += ShootBazooka;
@@ -43,30 +59,70 @@ public class BazookaScript : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Ammunition"))
+        if(other.CompareTag("Ammunition") && bazookaIsLoaded == false)
         {
+            gameObject.GetComponent<Collider>().isTrigger = false;
+            Debug.Log("AMMO");
+            //other.gameObject.transform.position = outOfSightPosition.position;
             ammunitionToShoot = other.gameObject;
-            bazookaLoaded();
+            ammoInstance = Instantiate(ammunitionToShoot, shootingTransform.position, shootingTransform.rotation);
+            Destroy(other.gameObject);
+            ammoInstance.SetActive(false);
+            bazookaIsLoaded = true;
+            PlayBazookaSound(0);
         }
     }
 
-    public void bazookaLoaded()
+    public void bazookaIsBeingHeldMethod()
     {
-        bazookaIsLoaded = true;
+        bazookaBeingHeld = true;
+        //audiosource.clip.play //Sound of loading bowling ball into bazooka
+    }
+    
+    public void bazookaNotBeingHeldMethod()
+    {
+        bazookaBeingHeld = false;
         //audiosource.clip.play //Sound of loading bowling ball into bazooka
     }
 
     public void ShootBazooka(InputAction.CallbackContext context)
     {
-        if (context.performed && bazookaIsLoaded && bazookaBeingHeld)
+        if (context.performed && bazookaIsLoaded == true && bazookaBeingHeld == true)
         {
-            var ammoInstance = Instantiate(ammunitionToShoot, shootingTransform);
-                ammoInstance.GetComponent<Rigidbody>().AddForce(transform.forward, ForceMode.Force);
-                
-                //audiosource.clip.play //Play sound of a loud boom which signifies that you just fired the bazooka
+            //Rigidbody ammoRb;
+            //var ammoInstance = Instantiate(ammunitionToShoot, shootingTransform.position, shootingTransform.rotation);
+            ammoInstance.transform.position = shootingTransform.position; 
+            ammoInstance.SetActive(true);
+            var ammoRb = ammoInstance.GetComponent<Rigidbody>();
+            ammoRb.useGravity = true;
+            ammoRb.constraints = RigidbodyConstraints.None;
+            ammoRb.AddForce(transform.forward * shootingForce);
+            
+            PlayBazookaSound(1); //Play sound of a loud boom which signifies that you just fired the bazooka
+
+            bazookaIsLoaded = false;
+            StartCoroutine(EnableColliderAgain());
+            Debug.Log("SHOOT BAZOOKA"); 
         }
+    }
+    
+    private void PlayBazookaSound(int pickedSoundToPlay)
+    {
+        if (arrayBazookaSounds.Length > 0)
+        {
+            BazookaAudioSource.clip = arrayBazookaSounds[pickedSoundToPlay];
+            BazookaAudioSource.Play();
+        }
+        
+    }
+
+    private IEnumerator EnableColliderAgain()
+    {
+        yield return new WaitForSeconds(0.5f);
+        thisGameobjectCollider.isTrigger = true;
+
     }
     
 }

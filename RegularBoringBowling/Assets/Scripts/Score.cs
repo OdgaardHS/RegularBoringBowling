@@ -119,6 +119,7 @@ public class Score : MonoBehaviour
         PinsSinceRoundStart = 0;
         CurrentRound++;
         isReseting = false;
+        haveStriked = false;
         Debug.Log($"Starting Round: {CurrentRound}");
     }
 

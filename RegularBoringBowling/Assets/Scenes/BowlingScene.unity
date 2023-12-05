@@ -23785,6 +23785,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1283434089}
   - component: {fileID: 1283434090}
+  - component: {fileID: 1283434091}
   m_Layer: 0
   m_Name: EjectingPoint
   m_TagString: Untagged
@@ -23800,13 +23801,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1283434088}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.122428656, y: -0, z: -0, w: 0.9924774}
+  m_LocalRotation: {x: -0.0035587945, y: 0.9920579, z: 0.12237695, w: -0.028849322}
   m_LocalPosition: {x: 0, y: 0.279, z: -0.329}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1782661621078582376}
-  m_LocalEulerAnglesHint: {x: 14.065, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -14.04, y: 183.434, z: -0.834}
 --- !u!114 &1283434090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23823,7 +23824,111 @@ MonoBehaviour:
   bazookaIsLoaded: 0
   reloadCollider: {fileID: 1515146704}
   shootingTransform: {fileID: 1283434089}
+  outOfSightPosition: {fileID: 0}
+  bazookaParent: {fileID: 0}
+  shootingForce: 3000
   triggerButtonReference: {fileID: 6333731966649336164, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  BazookaAudioSource: {fileID: 1283434091}
+  arrayBazookaSounds:
+  - {fileID: 8300000, guid: 5001f608588e8dd47b6b016360c6c076, type: 3}
+  - {fileID: 8300000, guid: b83ccc3536db9af4e9562b10371fbca8, type: 3}
+  pickedSoundToPlay: 0
+--- !u!82 &1283434091
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1283434088}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &1285542552 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3621981467535291324, guid: ddc38db09f9124241b4b4e9b2b9831eb, type: 3}
@@ -35713,13 +35818,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085422504}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: 0.30797115, w: 0.9513957}
+  m_LocalRotation: {x: 0.91647536, y: 0.39871022, z: -0.016913626, w: -0.028582692}
   m_LocalPosition: {x: 0.09000003, y: 0.0893, z: -0.008100033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1782661621078582376}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35.874}
+  m_LocalEulerAnglesHint: {x: -2.23, y: 183.086, z: 132.917}
 --- !u!1 &2095196928
 GameObject:
   m_ObjectHideFlags: 0

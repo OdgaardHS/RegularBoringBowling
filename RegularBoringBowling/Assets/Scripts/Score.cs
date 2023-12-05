@@ -27,6 +27,12 @@ public class Score : MonoBehaviour
     public TMP_Text ThrowsLeftUI;
 
     public GameObject Warning;
+    AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -42,6 +48,8 @@ public class Score : MonoBehaviour
             isReseting = true;
             haveStriked = true;
             Debug.Log("The player have striked!");
+
+            audioSource.Play();
 
             StartCoroutine(waitTillReset());
         }

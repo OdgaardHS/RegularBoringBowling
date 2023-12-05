@@ -10,6 +10,13 @@ public class BowlingPin : MonoBehaviour
     private Quaternion ResetRotation;
     Rigidbody rigidBody;
 
+    AudioSource audioSource;
+
+    private int arrayMax;
+    public int soundToPlay;
+
+    [SerializeField] private AudioClip[] arrayPhysicSounds;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,7 +32,7 @@ public class BowlingPin : MonoBehaviour
         {
             float angle = Quaternion.Angle(ResetRotation, transform.rotation);
 
-            if (angle >= 75)
+            if (angle >= 50)
             {
                 Score.PlayerScore++;
                 Score.PinsSinceRoundStart++;
@@ -45,4 +52,23 @@ public class BowlingPin : MonoBehaviour
             isFallen = false;
         }
     }
+
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "BowlingPin" || collision.gameObject.tag == "Ammunition" && arrayPhysicSounds.Length > 0)
+        {
+            audioSource = collision.gameObject.GetComponent<AudioSource>();
+            arrayMax = arrayPhysicSounds.Length;
+            soundToPlay = Random.Range(0, arrayMax);
+            audioSource.clip = arrayPhysicSounds[soundToPlay];
+
+            audioSource.volume = Mathf.Clamp01(collision.relativeVelocity.magnitude / 15);
+
+            if (collision.relativeVelocity.magnitude > 1)
+                audioSource.Play();
+        }
+    }
+
+
 }

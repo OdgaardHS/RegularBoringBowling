@@ -8,6 +8,7 @@ TagManager:
   - ResetZone
   - Ammunition
   - BowlingPin
+  - BowlingLane
   layers:
   - Default
   - TransparentFX

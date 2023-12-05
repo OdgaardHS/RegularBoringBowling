@@ -69,13 +69,13 @@ public class PhysicsButton : MonoBehaviour
             Released();
     }
 
-     void FixedUpdate(){
-         Vector3 localVelocity = transform.InverseTransformDirection(buttonTop.GetComponent<Rigidbody>().velocity);
-         Rigidbody rb = buttonTop.GetComponent<Rigidbody>();
-         localVelocity.x = 0;
-         localVelocity.z = 0;
-     rb.velocity = transform.TransformDirection(localVelocity);
-    }
+  //   void FixedUpdate(){
+    //     Vector3 localVelocity = transform.InverseTransformDirection(buttonTop.GetComponent<Rigidbody>().velocity);
+      //   Rigidbody rb = buttonTop.GetComponent<Rigidbody>();
+       //  localVelocity.x = 0;
+        // localVelocity.z = 0;
+     //rb.velocity = transform.TransformDirection(localVelocity);
+    //}
 
     void Pressed(){
         prevPressedState = isPressed;

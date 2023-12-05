@@ -67,7 +67,7 @@ public class BazookaScript : MonoBehaviour
             Debug.Log("AMMO");
             //other.gameObject.transform.position = outOfSightPosition.position;
             ammunitionToShoot = other.gameObject;
-            ammoInstance = Instantiate(ammunitionToShoot, shootingTransform.position, shootingTransform.rotation);
+            ammoInstance = Instantiate(ammunitionToShoot, shootingTransform.position, transform.rotation);
             Destroy(other.gameObject);
             ammoInstance.SetActive(false);
             bazookaIsLoaded = true;

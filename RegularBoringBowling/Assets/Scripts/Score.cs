@@ -10,7 +10,10 @@ public class Score : MonoBehaviour
     public static int PlayerScore = 0;
 
     public static bool pinsReset = false;
+    public static bool ballsReset = false;
+
     private bool haveStriked = false;
+    private bool isReseting = false;
 
     public static int PinsSinceRoundStart = 0;
     private int CurrentRound = 1;
@@ -21,25 +24,26 @@ public class Score : MonoBehaviour
     public TMP_Text Round4;
     public TMP_Text Round5;
     public TMP_Text Total;
+    public TMP_Text ThrowsLeftUI;
+
+    public GameObject Warning;
 
     // Update is called once per frame
     void Update()
     {
-        if (ThrowsLeft <= 0 && !haveStriked)
+        if (ThrowsLeft <= 0 && !haveStriked && !isReseting)
         {
+            isReseting = true;
             StartCoroutine(waitTillReset());
-            
-            ThrowsLeft = 2;
         }
 
-        if (PinsSinceRoundStart >= 10 && !haveStriked && ThrowsLeft >= 1)
+        if (PinsSinceRoundStart >= 10 && !haveStriked && ThrowsLeft >= 1 && !isReseting)
         {
+            isReseting = true;
             haveStriked = true;
             Debug.Log("The player have striked!");
 
             StartCoroutine(waitTillReset());
-
-            ThrowsLeft = 2;
         }
 
         switch (CurrentRound)
@@ -62,20 +66,64 @@ public class Score : MonoBehaviour
         }
 
         Total.text = PlayerScore.ToString();
+        ThrowsLeftUI.text = $"Throws Left: {ThrowsLeft.ToString()}";
+    }
+
+    public void ResetBalls()
+    {
+        StartCoroutine(ballReset());
+    }
+
+    public void ResetPins()
+    {
+        StartCoroutine(pinReset());
+    }
+
+    public void ResetPoints()
+    {
+        PlayerScore = 0;
+        PinsSinceRoundStart = 0;
+        CurrentRound = 1;
+        ThrowsLeft = 2;
+        ResetPins();
+
+        Round1.text = 0.ToString();
+        Round2.text = 0.ToString();
+        Round3.text = 0.ToString();
+        Round4.text = 0.ToString();
+        Round5.text = 0.ToString();
     }
 
     IEnumerator waitTillReset()
     {
-        yield return new WaitForSeconds(5);
+        isReseting = true;
+        Warning.SetActive(true);
+        yield return new WaitForSeconds(4);
 
         pinsReset = true;
+        ThrowsLeft = 2;
 
-        yield return new WaitForSeconds(2);
-
+        yield return new WaitForSeconds(1);
+        Warning.SetActive(false);
+        
         pinsReset = false;
 
         PinsSinceRoundStart = 0;
         CurrentRound++;
         Debug.Log($"Starting Round: {CurrentRound}");
+    }
+
+    IEnumerator pinReset()
+    {
+        pinsReset = true;
+        yield return new WaitForSeconds(1);
+        pinsReset = false;
+    }
+
+    IEnumerator ballReset()
+    {
+        ballsReset = true;
+        yield return new WaitForSeconds(1);
+        ballsReset = false;
     }
 }

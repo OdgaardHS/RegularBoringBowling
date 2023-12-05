@@ -28,4 +28,15 @@ public class BowlingBall : MonoBehaviour
             rigidBody.angularVelocity = Vector3.zero;
         }
     }
+
+    private void Update()
+    {
+        if (Score.ballsReset)
+        {
+            transform.position = ResetPosition;
+            transform.rotation = ResetRotation;
+            rigidBody.velocity = Vector3.zero;
+            rigidBody.angularVelocity = Vector3.zero;
+        }
+    }
 }

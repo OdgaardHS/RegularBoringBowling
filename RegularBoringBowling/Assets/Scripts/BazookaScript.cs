@@ -19,14 +19,14 @@ public class BazookaScript : MonoBehaviour
     
     //Transforms
     [SerializeField] private Transform shootingTransform;
-    [SerializeField] private Transform outOfSightPosition;
-    [SerializeField] private Transform bazookaParent;
+    //[SerializeField] private Transform outOfSightPosition;
+    //[SerializeField] private Transform bazookaParent;
 
     private GameObject ammoInstance;
     private Collider thisGameobjectCollider;
     
     //Ints
-    [SerializeField] private int shootingForce = 3000;
+    [SerializeField] private int shootingForce = 30000;
     
     
     [SerializeField] private InputActionReference triggerButtonReference = null;

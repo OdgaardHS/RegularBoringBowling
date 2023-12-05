@@ -12,12 +12,15 @@ public class BowlingBall : MonoBehaviour
 
     bool isRolling = false;
 
+    [SerializeField]
+    private GameObject SpawnPoint;
+
     private void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        ResetPosition = transform.position;
-        ResetRotation = transform.rotation;
+        ResetPosition = SpawnPoint.transform.position;
+        ResetRotation = SpawnPoint.transform.rotation;
     }
 
     private void OnTriggerEnter(Collider other)

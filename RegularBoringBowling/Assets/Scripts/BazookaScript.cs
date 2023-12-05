@@ -78,13 +78,11 @@ public class BazookaScript : MonoBehaviour
     public void bazookaIsBeingHeldMethod()
     {
         bazookaBeingHeld = true;
-        //audiosource.clip.play //Sound of loading bowling ball into bazooka
     }
     
     public void bazookaNotBeingHeldMethod()
     {
         bazookaBeingHeld = false;
-        //audiosource.clip.play //Sound of loading bowling ball into bazooka
     }
 
     public void ShootBazooka(InputAction.CallbackContext context)
